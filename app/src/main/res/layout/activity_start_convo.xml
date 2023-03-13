@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/img_upper_d"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:background="#0EB500"/>
+
+        <TextView
+            android:id="@+id/greenbot"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/greenbot"
+            android:textAppearance="@style/greenbot"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageButton
+            android:id="@+id/callBtn"
+            android:layout_width="35dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="330sp"
+            android:layout_marginTop="25sp"
+            android:background="#0EB500"
+            android:outlineProvider="none"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toEndOf="@id/greenbot"
+            app:layout_constraintTop_toTopOf="@id/greenbot"
+            app:srcCompat="@drawable/phone" />
+
+        <ImageButton
+            android:id="@+id/menuBtn"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="26sp"
+            android:background="#0EB500"
+            android:outlineProvider="none"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toEndOf="@id/img_upper_d"
+            app:layout_constraintTop_toTopOf="@id/img_upper_d"
+            app:srcCompat="@drawable/mainmenu" />
+
+        <ImageButton
+            android:id="@+id/infoBtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="375sp"
+            android:layout_marginTop="25sp"
+            android:adjustViewBounds="true"
+            android:background="#0EB500"
+            android:gravity="center_vertical|start"
+            android:outlineProvider="none"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_upper_d"
+            app:srcCompat="@drawable/newinfo"/>
+
+
+    </FrameLayout>
+
+
+    <View
+        android:id="@+id/chatVector"
+        android:layout_width="70dp"
+        android:layout_height="13dp"
+        android:background="@drawable/smallconvorect"
+        android:paddingStart="1dp"
+        android:paddingEnd="10dp"
+        app:backgroundTint="#0EB500"
+        app:layout_constraintBottom_toTopOf="@+id/chatRectangle"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintVertical_bias="0.973" />
+
+    <ImageButton
+        android:id="@+id/sendBtn"
+        android:layout_width="30dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="28sp"
+        android:layout_marginBottom="27sp"
+        android:adjustViewBounds="true"
+        android:background="#F5F5F5"
+        android:elevation="18dp"
+        android:outlineProvider="none"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/newsent"
+        tools:layout_editor_absoluteX="350dp"
+        tools:layout_editor_absoluteY="670dp" />
+
+
+    <View
+        android:id="@+id/chatRectangle"
+        android:layout_width="370dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="17dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/convorectangle"
+        android:elevation="2dp"
+        android:translationZ="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/enterMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="50dp"
+        android:background="@null"
+        android:elevation="18dp"
+        android:fontFamily="@font/poppins"
+        android:hint="Send a message . . ."
+        android:textColor="#9a8c98"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/chatRectangle"
+        app:layout_constraintEnd_toStartOf="@+id/sendBtn"
+        app:layout_constraintStart_toStartOf="@+id/chatRectangle"
+        app:layout_constraintTop_toTopOf="@+id/sendBtn" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="412dp"
+        android:layout_height="534dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

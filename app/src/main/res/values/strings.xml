@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">GreenBot_1</string>
+
+    <string name="choose_your">
+
+Choose your Date of Birth
+</string>
+
+    Day | Month | Year
+
+    <string name="i_agree_to_">
+
+I agree to the terms and conditions
+</string>
+
+    <!-- strings.xml -->
+    <string name="our_mental">Our Mental Health ChatBot is committed to protecting the privacy of its users. We collect information such as age, gender, and mental health symptoms to provide personalized support and resources. However, we do not disclose or share this information with any third-party without the explicit consent of the user. We also use appropriate security measures to protect your personal data from unauthorized access, modification, or disclosure.
+</string>
+
+    <!-- strings.xml -->
+    <string name="greenbot">
+
+GreenBot
+</string>
+
+
+</resources>

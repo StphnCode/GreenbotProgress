@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCFCFC"
+    tools:context=".Birthday">
+
+    <!-- Day | Month | Year -->
+
+
+    <TextView
+        android:id="@+id/choose_your"
+        android:layout_width="318dp"
+        android:layout_height="89dp"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Choose your Date of Birth"
+        android:textAppearance="@style/choose_your"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_2"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/rectangle_2"
+        android:layout_width="313dp"
+        android:layout_height="60dp"
+        android:background="@drawable/rectangle_2"
+        app:layout_constraintBottom_toTopOf="@+id/nxtButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choose_your" />
+
+    <Button
+        android:id="@+id/nxtButton"
+        android:layout_width="264dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        android:width="264px"
+        android:height="58px"
+        android:background="@drawable/btn_get_started"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Next"
+        android:textSize="22dp"
+        app:backgroundTint="#0EB500"
+        app:cornerRadius="50px"
+        app:layout_constraintBottom_toTopOf="@+id/this_won_t_"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_2" />
+
+
+    <!-- Date Picker Button -->
+
+    <TextView
+        android:id="@+id/this_won_t_"
+        android:layout_width="315dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center_horizontal|center_vertical"
+        android:text='This won&apos;t be set on public by default. Some of the conversations is age-specific'
+        android:textAppearance="@style/this_won_t_"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rectangle_2" />
+
+    <Button
+        android:id="@+id/datePickerButton"
+        style="?android:spinnerStyle"
+        android:layout_width="313dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="200dp"
+        android:fontFamily="@font/poppins"
+        android:onClick="openDatePicker"
+        android:text="MAR 12 2023"
+        android:textAlignment="center"
+        android:textColor="#aa000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/this_won_t_"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

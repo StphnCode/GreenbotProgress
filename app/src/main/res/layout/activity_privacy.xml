@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/privacy_pol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Privacy Policy"
+            android:textAppearance="@style/privacy_pol"
+            android:textSize="32sp"
+            app:fontFamily="@font/poppins_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.033"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/our_mental_"
+            android:layout_width="370dp"
+            android:layout_height="221dp"
+            android:text="@string/our_mental"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintTop_toBottomOf="@+id/privacy_pol"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="Terms of Service"
+            android:textAppearance="@style/terms"
+            android:textSize="20sp"
+            app:fontFamily="@font/poppins_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/our_mental_" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="By using our Mental Health ChatBot, you agree to the following terms of service:\n
+   1. The Mental Health ChatBot is not intended to be a substitute for professional medical advice, diagnosis, or treatment. It is a tool to provide support and resources for individuals experiencing mental health symptoms.\n
+   2. The Mental Health ChatBot is not responsible for any damages or losses arising from the use of the service.\n
+   3. You agree to use the Mental Health ChatBot in compliance with all applicable laws and regulations.\n
+   4. You are responsible for maintaining the confidentiality of your login information and for any activity that occurs under your account.\n
+   5. The Mental Health ChatBot may be unavailable at times due to maintenance or other issues.\nAuthorized Users:\n
+            Our Mental Health ChatBot is intended for use by individuals over the age of 18 who are seeking support for mental health concerns. It is not intended for use by
+            children under the age of 13. We reserve the right to terminate access to the Mental Health ChatBot for any user who violates our terms of service or privacy policy.\n"
+            android:textAppearance="@style/terms_serv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="28dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="82dp"
+
+                />
+
+            <TextView
+                android:id="@+id/i_agree_to_"
+                android:layout_width="220dp"
+                android:layout_height="19dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="I agree to the terms of service"
+                android:textAppearance="@style/i_agree_to_"
+                app:fontFamily="@font/poppins" />
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/nxtBtn"
+            android:layout_width="264dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="78dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="50dp"
+            android:width="264px"
+            android:height="58px"
+            android:gravity="center"
+            android:background="@drawable/btn_get_started"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Next"
+            android:textSize="22dp"
+            app:backgroundTint="#0EB500"
+            app:cornerRadius="50px"
+            tools:ignore="MissingConstraints" />
+
+
+    </LinearLayout>
+</ScrollView>
