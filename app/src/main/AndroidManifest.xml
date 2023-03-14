@@ -36,6 +36,12 @@
             android:name=".Registration"
             android:exported="false" />
         <activity
+            android:name=".MhcHotline"
+            android:exported="true"/>
+        <activity
+            android:name=".Help"
+            android:exported="true"/>
+        <activity
             android:name=".GetStarted"
             android:exported="true">
             <intent-filter>

@@ -31,5 +31,13 @@ public class SOS_UI extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SOS_UI.this, Help.class);
+                startActivity(intent);
+            }
+        });
     }
 }

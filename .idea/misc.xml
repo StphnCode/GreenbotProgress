@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/drawable/back.xml" value="0.2285" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/drawable/hotlinerectangle.xml" value="0.2285" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/font/poppins_light.xml" value="0.3625" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_birthday.xml" value="0.2971014492753623" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_get_started.xml" value="0.2971014492753623" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_hl_and_fgc.xml" value="0.1" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_login.xml" value="0.2971014492753623" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_menu.xml" value="0.2971014492753623" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_mhc_hotlines.xml" value="0.4" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_privacy.xml" value="0.2971014492753623" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_registration.xml" value="0.2971014492753623" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_self_care.xml" value="0.2971014492753623" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_sos_ui.xml" value="0.2971014492753623" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/activity_start_convo.xml" value="0.15208333333333332" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/hlandfgc.xml" value="0.2884963768115942" />
+        <entry key="..\:/updatedGreenBooty/app/src/main/res/layout/mhchotlines.xml" value="0.2884963768115942" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
