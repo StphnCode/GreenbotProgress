@@ -22,195 +22,235 @@
             app:srcCompat="@drawable/back_btn" />
     </RelativeLayout>
 
-    <ScrollView
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/pfp_img" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnCam"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="-40dp"
+        android:src="@drawable/baseline_photo_camera_24"
+        app:backgroundTint="#F0F0F0"
+        app:fabCustomSize="50dp"
+        app:maxImageSize="35dp"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins"
+                android:text="Sample"
+                android:textColor="@color/black"
+                android:textSize="22dp" />
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/pfp_img" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/poppins"
-                    android:text="Sample"
-                    android:textColor="@color/black"
-                    android:textSize="22dp" />
-
-                <ImageView
-                    android:id="@+id/btnChangeName"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="top"
-                    android:padding="8dp"
-                    app:srcCompat="@drawable/edit_icon" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="Account"
-                    android:textColor="#72000000"
-                    android:textSize="14dp"/>
-
-                <TextView
-                    android:id="@+id/btnAccSettings"
-                    android:layout_width="375dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/menu_bg"
-                    android:fontFamily="@font/poppins"
-                    android:paddingLeft="18dp"
-                    android:paddingTop="18dp"
-                    android:text="Account Settings"
-                    android:textColor="#bc000000"
-                    android:textSize="16dp" />
-
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="Legal and Policies"
-                    android:textColor="#72000000"
-                    android:textSize="14dp"/>
-
-                <TextView
-                    android:id="@+id/btnToS"
-                    android:layout_width="375dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/menu_bg"
-                    android:fontFamily="@font/poppins"
-                    android:paddingLeft="18dp"
-                    android:paddingTop="18dp"
-                    android:text="Terms of Service"
-                    android:textColor="#bc000000"
-                    android:textSize="16dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/btnPrivacy"
-                    android:layout_width="375dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/menu_bg"
-                    android:fontFamily="@font/poppins"
-                    android:paddingLeft="18dp"
-                    android:paddingTop="18dp"
-                    android:text="Privacy Policy"
-                    android:textColor="#bc000000"
-                    android:textSize="16dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/btnLicenses"
-                    android:layout_width="375dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/menu_bg"
-                    android:fontFamily="@font/poppins"
-                    android:paddingLeft="18dp"
-                    android:paddingTop="18dp"
-                    android:text="Licenses"
-                    android:textColor="#bc000000"
-                    android:textSize="16dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSignOut"
-                    android:layout_width="225dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/btn_get_started"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="Sign-out"
-                    android:textAllCaps="false"
-                    android:textColor="#ffffff"
-                    android:textSize="16dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtAreYouSure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/poppins"
-                    android:text="Are you sure you're signing out?"
-                    android:textColor="#72000000"
-                    android:textSize="13dp"/>
-
-            </LinearLayout>
+                android:id="@+id/btnChangeName"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top"
+                android:padding="8dp"
+                app:srcCompat="@drawable/edit_icon" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical">
 
-    </ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/poppins"
+                android:text="Account"
+                android:textColor="#72000000"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/btnAccSettings"
+                android:layout_width="375dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/menu_bg"
+                android:fontFamily="@font/poppins"
+                android:paddingLeft="18dp"
+                android:paddingTop="18dp"
+                android:text="Account Settings"
+                android:textColor="#bc000000"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="-62dp"
+                android:layout_marginRight="30dp"
+                app:srcCompat="@drawable/chevron_right" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/poppins"
+                android:text="Legal and Policies"
+                android:textColor="#72000000"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/btnToS"
+                android:layout_width="375dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/menu_bg"
+                android:fontFamily="@font/poppins"
+                android:paddingLeft="18dp"
+                android:paddingTop="18dp"
+                android:text="Terms of Service"
+                android:textColor="#bc000000"
+                android:textSize="16dp" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="-62dp"
+                android:layout_marginRight="30dp"
+                app:srcCompat="@drawable/chevron_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/btnPrivacy"
+                android:layout_width="375dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/menu_bg"
+                android:fontFamily="@font/poppins"
+                android:paddingLeft="18dp"
+                android:paddingTop="18dp"
+                android:text="Privacy Policy"
+                android:textColor="#bc000000"
+                android:textSize="16dp" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="-62dp"
+                android:layout_marginRight="30dp"
+                app:srcCompat="@drawable/chevron_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/btnLicenses"
+                android:layout_width="375dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/menu_bg"
+                android:fontFamily="@font/poppins"
+                android:paddingLeft="18dp"
+                android:paddingTop="18dp"
+                android:text="Licenses"
+                android:textColor="#bc000000"
+                android:textSize="16dp" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="-62dp"
+                android:layout_marginRight="30dp"
+                app:srcCompat="@drawable/chevron_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSignOut"
+                android:layout_width="225dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/btn_get_started"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Sign-out"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtAreYouSure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins"
+                android:text="Are you sure you're signing out?"
+                android:textAlignment="center"
+                android:textColor="#72000000"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

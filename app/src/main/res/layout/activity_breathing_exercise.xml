@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BreathingExercise">
+
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/bg_selfcare"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:paddingLeft="30dp"
+        android:paddingTop="15dp"
+        android:text="Square Breathing"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnBrBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="26dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_left" />
+
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="310dp"
+        android:layout_height="211dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="72dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Box breathing, also referred to as square breathing, is a deep breathing technique that can help you slow down your breathing. It is a great way to refocus your mind if you’ve been having a hectic day. Multitasking and busy schedules can be demanding on your brain and leave you in a fog. It’s important to take a brief break and clear your head before diving back into business as usual."
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <VideoView
+        android:id="@+id/squareBreathingVid"
+        android:layout_width="325dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="43dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <ImageButton
+        android:id="@+id/btnPlayVid"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="186dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/squareBreathingVid"
+        app:srcCompat="@drawable/baseline_play_arrow_24" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
