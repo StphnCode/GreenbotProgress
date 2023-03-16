@@ -17,6 +17,36 @@ I agree to the terms and conditions
     <string name="our_mental">Our Mental Health ChatBot is committed to protecting the privacy of its users. We collect information such as age, gender, and mental health symptoms to provide personalized support and resources. However, we do not disclose or share this information with any third-party without the explicit consent of the user. We also use appropriate security measures to protect your personal data from unauthorized access, modification, or disclosure.
 </string>
 
+    <string name="privacy_policy">At GreenBot, we are dedicated to maintaining the privacy of your personal information and respecting your right to privacy. When you use our Android-based mental health chatbot, we collect, use, and secure your information in accordance with the terms of this Privacy Policy.
+</string>
+
+    <string name="what_info1">•   Personal information: In order to offer you personalized mental health support, we may collect personal data from you, such as your name, email address, and student ID number.
+</string>
+    <string name="what_info2">•	  Chat history: For the purposes of quality control and research, we may collect and retain the text of your chat discussions with the chatbot.
+</string>
+    <string name="what_info3">•	  Usage data: We may gather information about how you use the chatbot, such as how long your chat sessions last, how many messages you send and receive, and which features you use most frequently.
+</string>
+
+    <string name="how_we_use1">•  Provide personalized mental health support and resources based on your individual needs.
+</string>
+
+    <string name="how_we_use2">•  Enhance our chatbot\'s usability and user experience.
+</string>
+
+    <string name="how_we_use3">•  Analyze the success of our chatbot in assisting college students with their mental health.
+</string>
+    <string name="how_we_protect">We take the necessary precautions to guard your personal information against abuse, disclosure, and unauthorized access. We continue to maintain procedural, electronic, and physical security measures to protect your personal data.
+</string>
+    <string name="sharing_info">Except where necessary to provide you with mental health support or as required by law, we do not sell or otherwise disclose your personal information to other parties.
+</string>
+    <string name="contact_us">If you have any questions or concerns about our Privacy Policy or how we use your personal information, please contact us at GreenBot@gmail.com.
+</string>
+    <string name="changes_to_priv1">We may occasionally update this privacy statement to reflect modifications to our privacy practices. Whenever we make any significant changes to our privacy policy, we\'ll put the updated privacy policy on this page to let you know.
+</string>
+    <string name="changes_to_priv2">By using our mental health chatbot, you consent to the collection, use, and sharing of your information as described in this Privacy Policy. If you do not agree with this Policy, please refrain from using our chatbot.
+</string>
+    <string name="changes_to_priv3">Last updated on March 15, 2023.
+</string>
     <!-- strings.xml -->
     <string name="greenbot">
 

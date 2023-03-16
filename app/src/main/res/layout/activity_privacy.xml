@@ -29,18 +29,196 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/our_mental_"
-            android:layout_width="370dp"
-            android:layout_height="221dp"
-            android:text="@string/our_mental"
-            android:textAppearance="@style/our_mental_"
-            app:fontFamily="@font/poppins"
-            app:layout_constraintTop_toBottomOf="@+id/privacy_pol"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="16dp"
+            android:text="@string/privacy_policy"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="What Information We Collect"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="22dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="When you use our chatbot for mental health, it may gather certain kinds of data, such as:"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/what_info1"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/what_info2"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/what_info3"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="How We Use Your Information"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="22dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="We use the information we collect from you to:"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/how_we_use1"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/how_we_use2"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/how_we_use3"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="How We Protect Your Information"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="22dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/how_we_protect"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Sharing Your Information"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="22dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/sharing_info"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Contact Us"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="22dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/contact_us"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Changes to This Privacy Policy"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="22dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/changes_to_priv1"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/changes_to_priv2"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/changes_to_priv3"
+            android:textAppearance="@style/our_mental_"
+            app:fontFamily="@font/poppins" />
 
         <TextView
             android:id="@+id/textView"

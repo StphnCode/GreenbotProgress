@@ -18,8 +18,7 @@
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:padding="12dp"
-            app:srcCompat="@drawable/back_btn" />
+            app:srcCompat="@drawable/right_arrow" />
     </RelativeLayout>
 
     <ImageView

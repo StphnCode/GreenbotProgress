@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AccountSettings">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/bg_acc_settings"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnAccSettingsBack"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/back_btn2" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="258dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Account Settings"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="28dp" />
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="Change your account settings"
+            android:textAlignment="center"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Your name"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="207dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins"
+            android:text="Sample"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25dp" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="120dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="E-mail"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+    <EditText
+        android:id="@+id/accSettingsEmail"
+        android:layout_width="270dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/menu_bg"
+        android:drawablePadding="16.02dp"
+        android:ellipsize="end"
+        android:ems="10"
+        android:fontFamily="@font/poppins"
+        android:inputType="textEmailAddress"
+        android:text="sample@gmail.com"
+        android:textAlignment="center"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.177"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <EditText
+        android:id="@+id/accSettingsPass"
+        android:layout_width="270dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/menu_bg"
+        android:ellipsize="end"
+        android:ems="10"
+        android:fontFamily="@font/poppins"
+        android:inputType="textPassword"
+        android:text="sample@gmail.com"
+        android:textAlignment="center"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.177"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"/>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="291dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Password"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSave"
+        android:layout_width="158dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginEnd="127dp"
+        android:layout_marginBottom="91dp"
+        android:background="@drawable/btn_get_started"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/changeEmail"
+        android:layout_width="62dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="36dp"
+        android:backgroundTint="#0066FF"
+        android:fontFamily="@font/poppins"
+        android:text="Change"
+        android:textAlignment="center"
+        android:textColor="#0066FF"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/accSettingsEmail"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/changePass"
+        android:layout_width="62dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="236dp"
+        android:backgroundTint="#0066FF"
+        android:fontFamily="@font/poppins"
+        android:text="Change"
+        android:textAlignment="center"
+        android:textColor="#0066FF"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/accSettingsPass" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

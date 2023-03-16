@@ -9,14 +9,15 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Menu extends AppCompatActivity {
     ImageView btnBack, userIcon;
     FloatingActionButton btnCam;
-    String path;
-    Uri uri;
+    TextView btnAccSettings, btnToS, btnPrivacy, btnLicenses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,9 +26,20 @@ public class Menu extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_menu);
 
+        btnAccSettings = findViewById(R.id.btnAccSettings);
         btnBack = findViewById(R.id.btnBack);
         btnCam = findViewById(R.id.btnCam);
-        userIcon = findViewById(R.id.userIcon);
+        btnLicenses = findViewById(R.id.btnLicenses);
+        btnPrivacy = findViewById(R.id.btnPrivacy);
+        btnToS = findViewById(R.id.btnToS);
+
+        btnAccSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Menu.this, AccountSettings.class);
+                startActivity(intent);
+            }
+        });
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +53,21 @@ public class Menu extends AppCompatActivity {
             public void onClick(View view) {
 
 
+            }
+        });
+        btnPrivacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Menu.this, MenuPrivacyPolicy.class);
+                startActivity(intent);
+            }
+        });
+
+        btnToS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Menu.this, TermsOfService.class);
+                startActivity(intent);
             }
         });
 
