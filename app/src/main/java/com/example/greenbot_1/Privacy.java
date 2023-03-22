@@ -35,7 +35,7 @@ public class Privacy extends AppCompatActivity {
     }
 
     public void openConvo(){
-        Intent intent = new Intent(Privacy.this, StartConvo.class);
+        Intent intent = new Intent(Privacy.this, VerifyEmail.class);
         startActivity(intent);
     }
 

@@ -112,6 +112,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPasswordLogin" />
 
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:layout_width="24dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="192dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/txtDontHaveAcc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordLogin" />
+
     <TextView
         android:id="@+id/txtDontHaveAcc"
         android:layout_width="wrap_content"
@@ -119,10 +131,12 @@
         android:layout_marginStart="180dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="173dp"
+        android:layout_marginBottom="65dp"
         android:fontFamily="@font/poppins"
         android:text="Don't have an account? Sign-up"
         android:textColor="@color/black"
         android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
