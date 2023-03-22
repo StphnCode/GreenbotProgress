@@ -26,8 +26,11 @@ import com.google.android.material.internal.ClippableRoundedCornerLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Registration extends AppCompatActivity {
     Button btnRegister;
@@ -35,7 +38,7 @@ public class Registration extends AppCompatActivity {
     EditText editEnterName, editEmail, editPassword, editRePassword;
     ProgressBar progressBar;
     DatabaseReference dbReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://greenbot-1-default-rtdb.firebaseio.com/");
-    static int userId = 1;
+    long maxId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +50,12 @@ public class Registration extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.btnRegister);
         txtSignIn = findViewById(R.id.txtHaveAcc);
-
+        progressBar = findViewById(R.id.progressBar);
         editEnterName = findViewById(R.id.editEnterName);
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         editRePassword = findViewById(R.id.editRePassword);
-        progressBar = findViewById(R.id.progressBar);
+
 
         txtSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +71,19 @@ public class Registration extends AppCompatActivity {
         ss.setSpan(fcsGreen, 25,32, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         txtSignIn.setText(ss);
 
+        dbReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    maxId=(snapshot.getChildrenCount());
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         btnRegister.setOnClickListener(v-> userRegister());
@@ -77,7 +92,6 @@ public class Registration extends AppCompatActivity {
 
     }
     void userRegister(){
-        String userID = String.valueOf(userId);
         String name = editEnterName.getText().toString();
         String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
@@ -89,11 +103,11 @@ public class Registration extends AppCompatActivity {
             return;
         }
 
-        createAccountInFirebase(userID, name, email, password);
+        createAccountInFirebase(name, email, password);
 
     }
 
-    void createAccountInFirebase(String userID, String name, String email, String password){
+    void createAccountInFirebase(String name, String email, String password){
         changeInProgress(true);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -105,8 +119,7 @@ public class Registration extends AppCompatActivity {
                             // creating account is done
                             Utility.showToast(Registration.this, "Successfully registered!");
                             firebaseAuth.getCurrentUser().sendEmailVerification();
-                            sendDataToDB(userID, name, email, password);
-                            userId++;
+                            sendDataToDB(name, email, password);
                             startNextActivity();
 
                         }else{
@@ -128,11 +141,11 @@ public class Registration extends AppCompatActivity {
         }
     }
 
-    void sendDataToDB(String userID, String name, String email, String password){
-        dbReference.child("User").child(userID).child("name").setValue(name);
-        dbReference.child("User").child(userID).child("id").setValue(userID);
-        dbReference.child("User").child(userID).child("email").setValue(email);
-        dbReference.child("User").child(userID).child("password").setValue(password);
+    void sendDataToDB(String name, String email, String password){
+        dbReference.child("User").child(String.valueOf(maxId+1)).child("name").setValue(name);
+        dbReference.child("User").child(String.valueOf(maxId+1)).child("id").setValue(String.valueOf(maxId+1));
+        dbReference.child("User").child(String.valueOf(maxId+1)).child("email").setValue(email);
+        dbReference.child("User").child(String.valueOf(maxId+1)).child("password").setValue(password);
 
 
     }
