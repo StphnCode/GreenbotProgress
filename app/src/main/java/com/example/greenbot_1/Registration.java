@@ -172,10 +172,7 @@ public class Registration extends AppCompatActivity {
         member.setPassword(password);
         member.setId(id);
 
-//        ref.child("User").child(String.valueOf(maxId+1)).child("name").setValue(name);
-//        ref.child("User").child(String.valueOf(maxId+1)).child("id").setValue(String.valueOf(maxId+1));
-//        ref.child("User").child(String.valueOf(maxId+1)).child("email").setValue(email);
-//        ref.child("User").child(String.valueOf(maxId+1)).child("password").setValue(password);
+
 
         ref.child(String.valueOf(id)).setValue(member);
 

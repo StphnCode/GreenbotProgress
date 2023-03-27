@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "29330528037",
-    "project_id": "greenbot-1",
-    "storage_bucket": "greenbot-1.appspot.com"
+    "project_number": "289011982981",
+    "project_id": "greenbot-1-8fc34",
+    "storage_bucket": "greenbot-1-8fc34.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:29330528037:android:be9e7fcaa531b46625accc",
+        "mobilesdk_app_id": "1:289011982981:android:c1fb67cb04a6497987ffec",
         "android_client_info": {
           "package_name": "com.example.greenbot_1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "29330528037-u8huk8raf4s82cjuu5aghfm720mb2doc.apps.googleusercontent.com",
+          "client_id": "289011982981-m91usgomvharagkqd7ff18fe234ndd8l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDuOMLzhRqXmwyLPKPqiy_D-3JoEgdxDzs"
+          "current_key": "AIzaSyAyIOd__MzRlPkvhcraFerZ-Qsyp-yXeTo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "29330528037-u8huk8raf4s82cjuu5aghfm720mb2doc.apps.googleusercontent.com",
+              "client_id": "289011982981-m91usgomvharagkqd7ff18fe234ndd8l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
