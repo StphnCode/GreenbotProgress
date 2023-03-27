@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Patterns;
 import android.view.View;
@@ -70,6 +71,12 @@ public class Login extends AppCompatActivity {
 
 
         boolean isValidated = validateData(email, password);
+        if(checkEmpty(editEmailLogin)){
+            editEmailLogin.setError("Required Field!");
+        }
+        if(checkEmpty(editPasswordLogin)){
+            editPasswordLogin.setError("Required Field!");
+        }
         if(!isValidated){
             return;
         }
@@ -113,6 +120,10 @@ public class Login extends AppCompatActivity {
             txtSignUp.setVisibility(View.VISIBLE);
         }
     }
+    boolean checkEmpty(EditText text){
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
     boolean validateData(String email, String password){
         // validate the data entered by the user
 
@@ -120,11 +131,6 @@ public class Login extends AppCompatActivity {
             editEmailLogin.setError("Email is invalid!");
             return false;
         }
-        if(password.length() < 8){
-            editPasswordLogin.setError("Password must be at least 8 characters long.");
-            return false;
-        }
-
         return true;
     }
 }

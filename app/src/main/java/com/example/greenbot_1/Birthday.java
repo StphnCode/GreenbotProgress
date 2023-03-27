@@ -1,5 +1,6 @@
 package com.example.greenbot_1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -12,6 +13,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.Calendar;
 
 
@@ -21,6 +28,12 @@ public class Birthday extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
     private Button nxtButton;
+    int selectedYear, selectedMonth, selectedDay, currentYear, currentMonth, currentDay, age;
+   // DatabaseReference dbReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://greenbot-1-default-rtdb.firebaseio.com/");
+    FirebaseDatabase database;
+    DatabaseReference ref;
+    Member member;
+    long maxId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +48,37 @@ public class Birthday extends AppCompatActivity {
         dateButton.setText(getTodaysDate());
 
         nxtButton = findViewById(R.id.nxtButton);
+        member = new Member();
+        ref = database.getInstance().getReference().child("Users");
+
+//        if(selectedYear == 0 || selectedMonth == 0 || selectedDay == 0 ){
+//
+//            return;
+//        }
         nxtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                age = calculateAge(currentYear, currentDay, selectedYear, selectedDay);
+                if(age < 17 || age >= 2023){
+                    Utility.showToast(Birthday.this, "Age must be greater than or equal 17");
+                    return;
+
+                }
+                long id = maxId;
+                ref.child(String.valueOf(id)).child("age").setValue(age);
                 openPrivacy();
+            }
+        });
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                maxId = (snapshot.getChildrenCount());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
@@ -55,11 +95,11 @@ public class Birthday extends AppCompatActivity {
 
     private String getTodaysDate(){
         Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        month = month + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        return makeDateString(day, month, year);
+        currentYear = cal.get(Calendar.YEAR);
+        currentMonth = cal.get(Calendar.MONTH);
+        currentMonth = currentMonth + 1;
+        currentDay = cal.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(currentDay, currentMonth, currentYear);
     }
 
 
@@ -69,6 +109,9 @@ public class Birthday extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day)
             {
                 month = month + 1;
+                selectedYear = year;
+                selectedMonth = month;
+                selectedDay = day;
                 String date = makeDateString(day, month, year);
                 dateButton.setText(date);
             }
@@ -119,5 +162,13 @@ public class Birthday extends AppCompatActivity {
 
     public void openDatePicker(View view) {
         datePickerDialog.show();
+    }
+
+    int calculateAge(int currentYear, int currentDay, int selectedYear, int selectedDay){
+        int age = currentYear - selectedYear;
+        if(currentDay < selectedDay){
+            age--;
+        }
+        return age;
     }
 }

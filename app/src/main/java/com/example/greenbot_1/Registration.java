@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Patterns;
@@ -37,8 +38,11 @@ public class Registration extends AppCompatActivity {
     TextView txtSignIn;
     EditText editEnterName, editEmail, editPassword, editRePassword;
     ProgressBar progressBar;
-    DatabaseReference dbReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://greenbot-1-default-rtdb.firebaseio.com/");
-    long maxId = 1;
+    //DatabaseReference dbReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://greenbot-1-default-rtdb.firebaseio.com/");
+    DatabaseReference ref;
+    FirebaseDatabase database;
+    Member member;
+    long maxId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,8 @@ public class Registration extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         editRePassword = findViewById(R.id.editRePassword);
+        ref = database.getInstance().getReference().child("Users");
+        member = new Member();
 
 
         txtSignIn.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +77,7 @@ public class Registration extends AppCompatActivity {
         ss.setSpan(fcsGreen, 25,32, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         txtSignIn.setText(ss);
 
-        dbReference.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
@@ -99,11 +105,29 @@ public class Registration extends AppCompatActivity {
 
 
         boolean isValidated = validateData(name, email, password, rePassword);
+        if(checkEmpty(editEnterName)){
+            editEnterName.setError("Required field!");
+
+        }
+        if(checkEmpty(editEmail)){
+            editEmail.setError("Required field!");
+
+        }
+        if(checkEmpty(editPassword)){
+            editPassword.setError("Required field!");
+
+        }
+        if(checkEmpty(editRePassword)){
+            editRePassword.setError("Required field!");
+
+        }
         if(!isValidated){
             return;
         }
-
         createAccountInFirebase(name, email, password);
+
+
+
 
     }
 
@@ -142,21 +166,31 @@ public class Registration extends AppCompatActivity {
     }
 
     void sendDataToDB(String name, String email, String password){
-        dbReference.child("User").child(String.valueOf(maxId+1)).child("name").setValue(name);
-        dbReference.child("User").child(String.valueOf(maxId+1)).child("id").setValue(String.valueOf(maxId+1));
-        dbReference.child("User").child(String.valueOf(maxId+1)).child("email").setValue(email);
-        dbReference.child("User").child(String.valueOf(maxId+1)).child("password").setValue(password);
+        long id = maxId +1;
+        member.setName(name);
+        member.setEmail(email);
+        member.setPassword(password);
+        member.setId(id);
 
+//        ref.child("User").child(String.valueOf(maxId+1)).child("name").setValue(name);
+//        ref.child("User").child(String.valueOf(maxId+1)).child("id").setValue(String.valueOf(maxId+1));
+//        ref.child("User").child(String.valueOf(maxId+1)).child("email").setValue(email);
+//        ref.child("User").child(String.valueOf(maxId+1)).child("password").setValue(password);
+
+        ref.child(String.valueOf(id)).setValue(member);
 
     }
 
+
+
+    boolean checkEmpty(EditText text){
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+
+
     boolean validateData(String name, String email, String password, String rePassword){
         // validate the data entered by the user
-        if(name.length() == 0){
-            editEnterName.requestFocus();
-            editEnterName.setError("Required field!");
-            return false;
-        }
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             editEmail.setError("Email is invalid!");
             return false;

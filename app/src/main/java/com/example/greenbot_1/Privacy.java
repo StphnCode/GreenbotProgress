@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +16,7 @@ import com.example.greenbot_1.StartConvo;
 public class Privacy extends AppCompatActivity {
 
     private Button nxtBtn;
+    private RadioButton radioButton;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -25,10 +27,18 @@ public class Privacy extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_privacy);
 
-        Button nxtButton = (Button) findViewById(R.id.nxtBtn);
-        nxtButton.setOnClickListener(new View.OnClickListener(){
+        nxtBtn = findViewById(R.id.nxtBtn);
+        radioButton = findViewById(R.id.radioButton);
+        nxtBtn.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){ openConvo();
+            public void onClick(View v){
+                if(radioButton.isChecked()) {
+                    openConvo();
+                }else{
+                    Utility.showToast(Privacy.this, "You must agree to the terms and condition to register your account");
+                }
+
+
             }
         });
 
