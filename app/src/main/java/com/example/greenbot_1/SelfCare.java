@@ -18,7 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SelfCare extends AppCompatActivity {
-    ImageView btnLeftArrow, btnBreathingExercise;
+    ImageView btnLeftArrow, btnBreathingExercise, btnThoughtPad;
     TextView txtRate;
     Slider slider;
     ImageButton btnCheckMood;
@@ -32,6 +32,7 @@ public class SelfCare extends AppCompatActivity {
 
         btnLeftArrow = findViewById(R.id.btnLeftArrow);
         btnBreathingExercise = findViewById(R.id.BreathingExercise);
+        btnThoughtPad = findViewById(R.id.ThoughtPad);
         txtRate = findViewById(R.id.txtRate);
         slider = findViewById(R.id.slider);
         btnCheckMood = findViewById(R.id.btnCheckMood);
@@ -48,6 +49,13 @@ public class SelfCare extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SelfCare.this, BreathingExercise.class);
                 startActivity(intent);
+            }
+        });
+
+        btnThoughtPad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SelfCare.this, ThoughtPad.class));
             }
         });
 

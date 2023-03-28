@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class GetStarted extends AppCompatActivity {
 
     private Button btnGetStarted;
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +27,32 @@ public class GetStarted extends AppCompatActivity {
         setContentView(R.layout.activity_get_started);
 
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
         btnGetStarted = findViewById(R.id.btnGetStarted);
+
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                 startActivity(new Intent(GetStarted.this, Login.class));
-//                if(currentUser == null){
-//                    startActivity(new Intent(GetStarted.this, Login.class));
-//                }else{
-//                    startActivity(new Intent(GetStarted.this, StartConvo.class));
-//                }
-
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+        //check if a user is logged in
+        if(currentUser!=null){
+            startActivity(new Intent(GetStarted.this, StartConvo.class));
+            finish();
+        }else {
+            //no user is logged in
+            return;
+//            startActivity(new Intent(GetStarted.this, Login.class));
+//            finish();
+        }
     }
 }

@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,10 +29,12 @@ public class Birthday extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
     private Button nxtButton;
+
     int selectedYear, selectedMonth, selectedDay, currentYear, currentMonth, currentDay, age;
    // DatabaseReference dbReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://greenbot-1-default-rtdb.firebaseio.com/");
     FirebaseDatabase database;
     DatabaseReference ref;
+    FirebaseAuth mFirebaseAuth;
     Member member;
     long maxId;
 
@@ -50,11 +53,9 @@ public class Birthday extends AppCompatActivity {
         nxtButton = findViewById(R.id.nxtButton);
         member = new Member();
         ref = database.getInstance().getReference().child("Users");
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
-//        if(selectedYear == 0 || selectedMonth == 0 || selectedDay == 0 ){
-//
-//            return;
-//        }
+
         nxtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +67,10 @@ public class Birthday extends AppCompatActivity {
                 }
                 long id = maxId;
                 ref.child(String.valueOf(id)).child("age").setValue(age);
+                member.setAge(age);
+                String userUID = mFirebaseAuth.getCurrentUser().getUid();
+                ref.child(String.valueOf(id)).child("userUID").setValue(userUID);
+                member.setUserUID(userUID);
                 openPrivacy();
             }
         });

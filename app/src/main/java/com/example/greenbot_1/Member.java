@@ -7,6 +7,7 @@ public class Member {
     private long id;
     private int age;
 
+    private String userUID;
     public Member(){
 
     }
@@ -49,5 +50,13 @@ public class Member {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getUserUID() {
+        return userUID;
+    }
+
+    public void setUserUID(String userUID) {
+        this.userUID = userUID;
     }
 }

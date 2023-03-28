@@ -31,6 +31,7 @@ public class Login extends AppCompatActivity {
     EditText editEmailLogin, editPasswordLogin;
     ProgressBar progressBar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +46,14 @@ public class Login extends AppCompatActivity {
         editPasswordLogin = findViewById(R.id.editPasswordLogin);
         progressBar = findViewById(R.id.progressBar2);
 
+
         String text = "Don't have an account? Sign-up";
         SpannableString ss = new SpannableString(text);
         ForegroundColorSpan fcsGreen = new ForegroundColorSpan(Color.GREEN);
         ss.setSpan(fcsGreen, 23,30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         txtSignUp.setText(ss);
+
+
 
         txtSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
