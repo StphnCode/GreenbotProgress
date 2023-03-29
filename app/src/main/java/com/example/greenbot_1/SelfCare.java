@@ -55,7 +55,7 @@ public class SelfCare extends AppCompatActivity {
         btnThoughtPad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SelfCare.this, ThoughtPad.class));
+                startActivity(new Intent(SelfCare.this, ThoughtPadList.class));
             }
         });
 
