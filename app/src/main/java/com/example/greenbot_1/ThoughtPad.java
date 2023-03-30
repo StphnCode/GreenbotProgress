@@ -49,7 +49,7 @@ public class ThoughtPad extends AppCompatActivity {
         btnTPback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ThoughtPad.this, SelfCare.class));
+                startActivity(new Intent(ThoughtPad.this, ThoughtPadList.class));
             }
         });
 

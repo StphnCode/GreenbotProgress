@@ -66,5 +66,5 @@
         android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_imgsplash" />
+        app:srcCompat="@drawable/getstarted_pic" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,24 +14,28 @@ public class AdapterGreenbot extends RecyclerView.Adapter<AdapterGreenbot.MyView
 
     private ArrayList<String> list = new ArrayList<>();
 
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.dialogue, parent, false);
         return new MyViewHolder(itemView);
     }
 
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String chat = list.get(position);
 
         if (position % 2 == 0) { // user chat
+            holder.leftChatView.setVisibility(View.GONE);
             holder.rightChatView.setVisibility(View.VISIBLE);
             holder.rightChatText.setText(chat);
-            holder.leftChatView.setVisibility(View.GONE);
+
         } else { // chatbot response
+            holder.rightChatView.setVisibility(View.GONE);
             holder.leftChatView.setVisibility(View.VISIBLE);
             holder.leftChatText.setText(chat);
-            holder.rightChatView.setVisibility(View.GONE);
+
         }
     }
 

@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,9 +21,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class StartConvo extends AppCompatActivity {
 
     private AdapterGreenbot adapterGreenbot = new AdapterGreenbot();
+    List<String> list;
 
     RecyclerView recyclerView;
     EditText messageEditText;
@@ -45,15 +49,19 @@ public class StartConvo extends AppCompatActivity {
         EditText enterMsg = findViewById(R.id.enterMsg);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.18.237:5000/")
+                .baseUrl("http://192.168.254.112:5000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         GreenbotAPI apiService = retrofit.create(GreenbotAPI.class);
 
+
         RecyclerView rvChatList = findViewById(R.id.rvChatList);
-        rvChatList.setLayoutManager(new LinearLayoutManager(this));
         rvChatList.setAdapter(adapterGreenbot);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setStackFromEnd(true);
+        rvChatList.setLayoutManager(llm);
+
 
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,13 +84,6 @@ public class StartConvo extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(StartConvo.this, SelfCare.class);
-                startActivity(intent);
-            }
-        });
 
         btnSend.setOnClickListener((v)->{
             if(enterMsg.getText().toString().isEmpty()) {
@@ -92,6 +93,8 @@ public class StartConvo extends AppCompatActivity {
 
             String message = enterMsg.getText().toString();
             adapterGreenbot.addChatToList(message);
+            rvChatList.smoothScrollToPosition(adapterGreenbot.getItemCount());
+
 
             Runnable runnable = new Runnable() {
                 @Override
