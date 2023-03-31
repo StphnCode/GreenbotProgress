@@ -49,7 +49,7 @@ public class StartConvo extends AppCompatActivity {
         EditText enterMsg = findViewById(R.id.enterMsg);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.254.112:5000/")
+                .baseUrl("http://192.168.254.106:5000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
