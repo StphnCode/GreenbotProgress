@@ -17,4 +17,8 @@ public class Utility {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         return FirebaseFirestore.getInstance().collection("journal").document(currentUser.getUid()).collection("my_journal");
     }
+    static CollectionReference getCollectionReferenceForMoodTracker(){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        return FirebaseFirestore.getInstance().collection("mood tracker").document(currentUser.getUid()).collection("daily_mood");
+    }
 }

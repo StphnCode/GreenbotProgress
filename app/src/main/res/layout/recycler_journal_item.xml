@@ -18,13 +18,6 @@
         android:textColor="@color/black"
         android:textSize="18dp" />
 
-    <ImageView
-        android:id="@+id/imgEmoji"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="10dp"
-        android:background="@color/black"
-        android:layout_gravity="end"/>
 
     <TextView
         android:id="@+id/txtContent"

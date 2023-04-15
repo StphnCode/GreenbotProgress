@@ -1,5 +1,6 @@
 package com.example.greenbot_1;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,7 +12,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.slider.Slider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -19,9 +29,12 @@ import java.util.Date;
 
 public class SelfCare extends AppCompatActivity {
     ImageView btnLeftArrow, btnBreathingExercise, btnThoughtPad;
-    TextView txtRate;
+    TextView txtRate, txtCurrentDate;
+    FirebaseFirestore fStore;
+
     Slider slider;
     ImageButton btnCheckMood;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +49,7 @@ public class SelfCare extends AppCompatActivity {
         txtRate = findViewById(R.id.txtRate);
         slider = findViewById(R.id.slider);
         btnCheckMood = findViewById(R.id.btnCheckMood);
+
 
         btnLeftArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +75,7 @@ public class SelfCare extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-        TextView txtCurrentDate = findViewById(R.id.currentDate);
+        txtCurrentDate = findViewById(R.id.currentDate);
         txtCurrentDate.setText(currentDate);
 
         slider.addOnChangeListener(new Slider.OnChangeListener() {
@@ -74,9 +88,40 @@ public class SelfCare extends AppCompatActivity {
         btnCheckMood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 slider.setEnabled(false);
+                submitDailyMood();
             }
         });
 
+
+
+    }
+    void submitDailyMood(){
+        String date = txtCurrentDate.getText().toString();
+        int moodRate = Integer.parseInt(txtRate.getText().toString());
+
+
+        MoodTracker moodTracker = new MoodTracker();
+        moodTracker.setDate(date);
+        moodTracker.setMoodRate(moodRate);
+
+        saveMoodToFirebase(moodTracker);
+    }
+    void saveMoodToFirebase(MoodTracker moodTracker){
+        DocumentReference documentReference;
+        documentReference = Utility.getCollectionReferenceForMoodTracker().document();
+
+        documentReference.set(moodTracker).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Utility.showToast(SelfCare.this, "Saved");
+                    finish();
+                }else{
+                    Utility.showToast(SelfCare.this, "Failed to save");
+                }
+            }
+        });
     }
 }
