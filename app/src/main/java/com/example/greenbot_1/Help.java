@@ -49,7 +49,7 @@ public class Help extends AppCompatActivity {
         guidanceBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(Help.this, StartConvo.class);
+                Intent intent = new Intent(Help.this, ForGuidanceConsultation.class);
                 startActivity(intent);
             }
         });
