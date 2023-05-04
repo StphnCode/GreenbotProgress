@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -37,6 +39,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import org.w3c.dom.Document;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -44,8 +47,9 @@ import java.util.Locale;
 
 public class StartConvo extends AppCompatActivity {
 
-    private AdapterGreenbot adapterGreenbot = new AdapterGreenbot();
-    List<String> list;
+    private static final String CHAT_LIST_STATE_KEY = "chat_list_state";
+    private ArrayList<String> chatList = new ArrayList<>();
+    private AdapterGreenbot adapter = new AdapterGreenbot(chatList);
 
     RecyclerView recyclerView;
     EditText messageEditText;
@@ -58,6 +62,9 @@ public class StartConvo extends AppCompatActivity {
     private String userUID = "";
     private String name = "";
     String currentDateTime = "";
+
+    private Parcelable recyclerViewState;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,23 +82,31 @@ public class StartConvo extends AppCompatActivity {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         userUID = currentUser.getUid();
         database = FirebaseFirestore.getInstance();
+        fDatabase = FirebaseDatabase.getInstance();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyy - hh:mm a", Locale.getDefault());
         currentDateTime = dateFormat.format(new Date());
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.254.114:5000/")
+                .baseUrl("http://192.168.18.237:5000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         GreenbotAPI apiService = retrofit.create(GreenbotAPI.class);
 
 
+
         rvChatList = findViewById(R.id.rvChatList);
-        rvChatList.setAdapter(adapterGreenbot);
+        rvChatList.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setStackFromEnd(true);
         rvChatList.setLayoutManager(llm);
+
+        // Restore the state of the RecyclerView if available
+        if (savedInstanceState != null) {
+            chatList = savedInstanceState.getStringArrayList(CHAT_LIST_STATE_KEY);
+        }
+        rvChatList.setAdapter(adapter);
 
         ref = fDatabase.getInstance().getReference("Users");
         ref.addValueEventListener(new ValueEventListener() {
@@ -106,8 +121,6 @@ public class StartConvo extends AppCompatActivity {
 
                     }
                 }
-
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -115,7 +128,27 @@ public class StartConvo extends AppCompatActivity {
             }
         });
 
+        rvChatList.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // Restore the state of the RecyclerView if available
+                if (recyclerViewState != null) {
+                    rvChatList.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+                }
 
+                // Remove the global layout listener to prevent it from being called multiple times
+                rvChatList.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+
+        // Add a scroll listener to the RecyclerView to save its state when it is scrolled
+        rvChatList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
+            }
+        });
 
 
         btnMenu.setOnClickListener(new View.OnClickListener() {
@@ -147,8 +180,8 @@ public class StartConvo extends AppCompatActivity {
             }
 
             String message = enterMsg.getText().toString();
-            adapterGreenbot.addChatToList(message);
-            rvChatList.smoothScrollToPosition(adapterGreenbot.getItemCount());
+            adapter.addChatToList(message);
+            rvChatList.smoothScrollToPosition(adapter.getItemCount());
 
 
             DocumentReference documentReference = Utility.getCollectionReferenceForChat().document();
@@ -170,6 +203,8 @@ public class StartConvo extends AppCompatActivity {
             });
 
 
+
+
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
@@ -182,6 +217,20 @@ public class StartConvo extends AppCompatActivity {
             enterMsg.getText().clear();
         });
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("recycler_state", rvChatList.getLayoutManager().onSaveInstanceState());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        recyclerViewState = savedInstanceState.getParcelable("recycler_state");
+        rvChatList.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+    }
+
 
     private Callback<ChatResponse> callBack = new Callback<ChatResponse>() {
         @Override
@@ -206,8 +255,8 @@ public class StartConvo extends AppCompatActivity {
                         }
                     }
                 });
-                adapterGreenbot.addChatToList(chatbotResponse);
-                rvChatList.smoothScrollToPosition(adapterGreenbot.getItemCount());
+                adapter.addChatToList(chatbotResponse);
+                rvChatList.smoothScrollToPosition(adapter.getItemCount());
 //                Log.d("ChatbotResponse", chatbotResponse); // add this line to log the chatbot response
             } else {
                 Toast.makeText(StartConvo.this, "Something went wrong", Toast.LENGTH_LONG).show();

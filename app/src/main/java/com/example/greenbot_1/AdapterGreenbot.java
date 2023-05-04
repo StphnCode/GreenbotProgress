@@ -8,12 +8,15 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterGreenbot extends RecyclerView.Adapter<AdapterGreenbot.MyViewHolder> {
 
-    private ArrayList<String> list = new ArrayList<>();
+    private List<String> messageList;
 
+    public AdapterGreenbot(List<String> messageList) {
+        this.messageList = messageList;
+    }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -21,10 +24,9 @@ public class AdapterGreenbot extends RecyclerView.Adapter<AdapterGreenbot.MyView
         return new MyViewHolder(itemView);
     }
 
-
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        String chat = list.get(position);
+        String chat = String.valueOf(messageList.get(position));
 
         if (position % 2 == 0) { // user chat
             holder.leftChatView.setVisibility(View.GONE);
@@ -35,18 +37,17 @@ public class AdapterGreenbot extends RecyclerView.Adapter<AdapterGreenbot.MyView
             holder.rightChatView.setVisibility(View.GONE);
             holder.leftChatView.setVisibility(View.VISIBLE);
             holder.leftChatText.setText(chat);
-
         }
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return messageList.size();
     }
 
     public void addChatToList(String chat) {
-        list.add(chat);
-        notifyDataSetChanged();
+        messageList.add(chat);
+        notifyItemInserted(messageList.size()-1);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
