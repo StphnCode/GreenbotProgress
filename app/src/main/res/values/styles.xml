@@ -110,6 +110,10 @@
 
     </style>
 
+    <style name="DatePickerStyle">
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
 
 
 

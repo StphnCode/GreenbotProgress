@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -11,10 +12,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,26 +32,30 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.w3c.dom.Document;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class StartConvo extends AppCompatActivity {
 
     private static final String CHAT_LIST_STATE_KEY = "chat_list_state";
-    private ArrayList<String> chatList = new ArrayList<>();
+    private ArrayList<ChatMessage> chatList = new ArrayList<>();
     private AdapterGreenbot adapter = new AdapterGreenbot(chatList);
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    CollectionReference conversationRef = firestore.collection("conversations");
+    CollectionReference chatbotRepliesRef;
 
-    RecyclerView recyclerView;
-    EditText messageEditText;
     FirebaseUser currentUser;
     FirebaseFirestore database;
     FirebaseDatabase fDatabase;
@@ -62,9 +65,7 @@ public class StartConvo extends AppCompatActivity {
     private String userUID = "";
     private String name = "";
     String currentDateTime = "";
-
     private Parcelable recyclerViewState;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class StartConvo extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
         fDatabase = FirebaseDatabase.getInstance();
 
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyy - hh:mm a", Locale.getDefault());
         currentDateTime = dateFormat.format(new Date());
 
@@ -95,7 +97,6 @@ public class StartConvo extends AppCompatActivity {
         GreenbotAPI apiService = retrofit.create(GreenbotAPI.class);
 
 
-
         rvChatList = findViewById(R.id.rvChatList);
         rvChatList.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -104,44 +105,66 @@ public class StartConvo extends AppCompatActivity {
 
         // Restore the state of the RecyclerView if available
         if (savedInstanceState != null) {
-            chatList = savedInstanceState.getStringArrayList(CHAT_LIST_STATE_KEY);
+            chatList = savedInstanceState.getParcelableArrayList(CHAT_LIST_STATE_KEY);
         }
         rvChatList.setAdapter(adapter);
+
+        chatbotRepliesRef = firestore.collection("Chatbot Replies");
+
+        // Create a reference to the "Chatbot Replies" collection
+        CollectionReference chatbotRepliesRef = firestore.collection("Chatbot Replies");
+
+        // Load chatbot responses only once when the activity is created
+        loadChatMessagesFromFirestore();
+
+        chatbotRepliesRef.orderBy("timestamp", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<ChatMessage> chatbotResponseList = new ArrayList<>();
+
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        // Retrieve and add chatbot response data to chatbotResponseList
+                        ChatbotResponse chatbotResponse = document.toObject(ChatbotResponse.class);
+                        chatbotResponseList.add(new ChatMessage(chatbotResponse.getMessage(), false)); // Chatbot response
+                    }
+
+                    chatList.addAll(chatbotResponseList);
+
+                    adapter.notifyDataSetChanged();
+                    rvChatList.scrollToPosition(chatList.size() - 1);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("FirestoreError", "Error loading chatbot responses: " + e);
+                });
 
         ref = fDatabase.getInstance().getReference("Users");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String dbUID = dataSnapshot.child("userUID").getValue(String.class);
-                    if(userUID.equals(dbUID)){
-
+                    if (userUID.equals(dbUID)) {
                         name = dataSnapshot.child("name").getValue(String.class);
-
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
         rvChatList.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                // Restore the state of the RecyclerView if available
                 if (recyclerViewState != null) {
                     rvChatList.getLayoutManager().onRestoreInstanceState(recyclerViewState);
                 }
 
-                // Remove the global layout listener to prevent it from being called multiple times
                 rvChatList.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
 
-        // Add a scroll listener to the RecyclerView to save its state when it is scrolled
         rvChatList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -149,6 +172,7 @@ public class StartConvo extends AppCompatActivity {
                 recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
             }
         });
+
 
 
         btnMenu.setOnClickListener(new View.OnClickListener() {
@@ -173,62 +197,139 @@ public class StartConvo extends AppCompatActivity {
             }
         });
 
-        btnSend.setOnClickListener((v)->{
-            if(enterMsg.getText().toString().isEmpty()) {
+        // Inside `onCreate` method, when adding a new message:
+        btnSend.setOnClickListener(v -> {
+            if (enterMsg.getText().toString().isEmpty()) {
                 Toast.makeText(StartConvo.this, "Please enter a text", Toast.LENGTH_LONG).show();
                 return;
             }
 
-            String message = enterMsg.getText().toString();
-            adapter.addChatToList(message);
-            rvChatList.smoothScrollToPosition(adapter.getItemCount());
+            String userMessage = enterMsg.getText().toString();
 
-
-            DocumentReference documentReference = Utility.getCollectionReferenceForChat().document();
-            HashMap<String, Object> chat = new HashMap<>();
-            chat.put("userId", currentUser.getUid());
-            chat.put("userName", name);
-            chat.put("message", message);
-            chat.put("timestamp", currentDateTime);
-//            database.collection("chat").add(chat);
-            documentReference.set(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        return;
-                    }else{
-                        return;
-                    }
-                }
-            });
-
-
-
-
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    apiService.chatWithTheBit(message).enqueue(callBack);
-                }
-            };
-
-            new Thread(runnable).start();
-
+            // Add the user's message to the chatList and update the UI
+            ChatMessage userChatMessage = new ChatMessage(userMessage, true);
+            chatList.add(userChatMessage);
+            adapter.notifyItemInserted(chatList.size() - 1);
+            rvChatList.scrollToPosition(chatList.size() - 1);
             enterMsg.getText().clear();
+
+            //asynchronously add the user's message to Firestore
+            addMessageToFirestore(userMessage, true);
+
+            // Call the chatbot API to get the chatbot's response
+            Call<ChatResponse> call = apiService.getChatbotResponse(userMessage);
+            call.enqueue(callBack);
         });
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable("recycler_state", rvChatList.getLayoutManager().onSaveInstanceState());
+        outState.putParcelable(CHAT_LIST_STATE_KEY, rvChatList.getLayoutManager().onSaveInstanceState());
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        recyclerViewState = savedInstanceState.getParcelable("recycler_state");
-        rvChatList.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+        recyclerViewState = savedInstanceState.getParcelable(CHAT_LIST_STATE_KEY);
+    }
+
+
+    //function to save chatbot response in the "Chatbot Replies" collection
+    private void saveChatbotResponseInFirestore(String chatbotResponse) {
+        ChatbotResponse chatbotResponseObj = new ChatbotResponse();
+        chatbotResponseObj.setUserId("Chatbot");
+        chatbotResponseObj.setUserName("Chatbot");
+        chatbotResponseObj.setMessage(chatbotResponse);
+        chatbotResponseObj.setTimestamp(currentDateTime);
+
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        CollectionReference chatbotRepliesRef = firestore.collection("Chatbot Replies");
+
+        chatbotRepliesRef.add(chatbotResponseObj)
+                .addOnSuccessListener(documentReference -> {
+                    // Chatbot's response is successfully saved in the "Chatbot Replies" collection
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the error if the chatbot's response couldn't be saved
+                    Log.e("FirestoreError", "Error saving chatbot response: " + e);
+                });
+    }
+
+    private void addMessageToFirestore(String userMessage, boolean isUserMessage) {
+        // Generate a unique message ID
+        String uniqueMessageId = generateUniqueMessageId();
+
+        // Create a new Conversation object for the user's message
+        Conversation userConversation = new Conversation();
+        userConversation.setUserId(currentUser.getUid());
+        userConversation.setUserName(name);
+        userConversation.setMessage(userMessage);
+        userConversation.setTimestamp(currentDateTime);
+        userConversation.setMessageId(uniqueMessageId);
+
+        if (isUserMessage) {
+            userConversation.setSender("User");
+        } else {
+            userConversation.setSender("Chatbot");
+        }
+
+        // Add the user's message to Firestore with the correct timestamp
+        conversationRef.add(userConversation)
+                .addOnSuccessListener(documentReference -> {
+                    // User's message is successfully saved in Firestore
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the error if the user's message couldn't be saved
+                    Toast.makeText(StartConvo.this, "Error sending message", Toast.LENGTH_LONG).show();
+                });
+    }
+
+    private String generateUniqueMessageId() {
+        long timestamp = System.currentTimeMillis();
+        long randomValue = new Random().nextInt(1000);
+        return timestamp + "_" + randomValue;
+    }
+
+    private String getChatbotResponses() {
+        SharedPreferences sharedPreferences = getSharedPreferences("ChatbotResponses", MODE_PRIVATE);
+        return sharedPreferences.getString("responses", "");
+    }
+
+    private void loadChatMessagesFromFirestore() {
+        conversationRef.orderBy("timestamp", Query.Direction.ASCENDING)
+                .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                    if (e != null) {
+                        Log.e("FirestoreError", "Error loading chat messages: " + e);
+                        return;
+                    }
+
+                    chatList.clear(); // Clear the existing chat list
+
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        Conversation conversation = document.toObject(Conversation.class);
+                        chatList.add(new ChatMessage(conversation.getMessage(), currentUser.getUid().equals(conversation.getUserId())));
+                    }
+
+                    // Fetch chatbot responses from "Chatbot Replies" collection
+                    chatbotRepliesRef.orderBy("timestamp", Query.Direction.ASCENDING)
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshotsChatbot -> {
+                                for (QueryDocumentSnapshot documentChatbot : queryDocumentSnapshotsChatbot) {
+                                    ChatbotResponse chatbotResponse = documentChatbot.toObject(ChatbotResponse.class);
+                                    chatList.add(new ChatMessage(chatbotResponse.getMessage(), false)); // Chatbot response
+                                }
+
+                                adapter.notifyDataSetChanged();
+                                rvChatList.post(() -> {
+                                    rvChatList.scrollToPosition(chatList.size() - 1);
+                                });
+                            })
+                            .addOnFailureListener(eChatbot -> {
+                                Log.e("FirestoreError", "Error loading chatbot responses: " + eChatbot);
+                            });
+                });
     }
 
 
@@ -237,37 +338,30 @@ public class StartConvo extends AppCompatActivity {
         public void onResponse(Call<ChatResponse> call, Response<ChatResponse> response) {
             if (response.isSuccessful() && response.body() != null) {
                 String chatbotResponse = response.body().chatBotReply;
-                DocumentReference documentReference = Utility.getCollectionReferenceForChat().document();
-                HashMap<String, Object> chat = new HashMap<>();
-                chat.put("userId", "323chatbot");
-                chat.put("userName", "Chatbot");
-                chat.put("message", chatbotResponse);
-                chat.put("timestamp", currentDateTime);
-//                database.collection("chat").add(chat);
 
-                documentReference.set(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            return;
-                        }else{
-                            return;
-                        }
-                    }
-                });
-                adapter.addChatToList(chatbotResponse);
-                rvChatList.smoothScrollToPosition(adapter.getItemCount());
-//                Log.d("ChatbotResponse", chatbotResponse); // add this line to log the chatbot response
+                // Log the chatbot response
+                Log.d("ChatbotResponse", "Chatbot Response: " + chatbotResponse);
+
+                // To save the chatbot's response in Firestore
+                saveChatbotResponseInFirestore(chatbotResponse);
+
+                // Update the UI with the chatbot's response
+                ChatMessage chatbotChatMessage = new ChatMessage(chatbotResponse, false);
+                chatList.add(chatbotChatMessage);
+                adapter.notifyItemInserted(chatList.size() - 1);
+                rvChatList.scrollToPosition(chatList.size() - 1);
             } else {
-                Toast.makeText(StartConvo.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                // Handle errors when chatbot response retrieval fails
+                Log.e("ChatbotResponseError", "Failed to get chatbot response");
             }
         }
 
         @Override
         public void onFailure(Call<ChatResponse> call, Throwable t) {
-            Toast.makeText(StartConvo.this, "Something went wrong", Toast.LENGTH_LONG).show();
-            Log.e("ChatbotError", t.getMessage()); // add this line to log the error message
+            // Handle Retrofit or network errors
+            Log.e("ChatbotError", t.getMessage());
         }
     };
+    
 
 }

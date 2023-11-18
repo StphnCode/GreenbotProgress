@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".SOS_UI">
 
     <RelativeLayout
@@ -56,6 +57,7 @@
                 android:background="@drawable/btn_white_w_border"
                 android:fontFamily="@font/poppins_bold"
                 android:text="No"
+                android:textColor="#000000"
                 android:textAllCaps="false"
                 android:textSize="16dp" />
         </LinearLayout>

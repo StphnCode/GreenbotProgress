@@ -8,13 +8,13 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterGreenbot extends RecyclerView.Adapter<AdapterGreenbot.MyViewHolder> {
+    private List<ChatMessage> messageList;
 
-    private List<String> messageList;
-
-    public AdapterGreenbot(List<String> messageList) {
+    public AdapterGreenbot(ArrayList<ChatMessage> messageList) {
         this.messageList = messageList;
     }
 
@@ -26,14 +26,15 @@ public class AdapterGreenbot extends RecyclerView.Adapter<AdapterGreenbot.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        String chat = String.valueOf(messageList.get(position));
+        ChatMessage chatMessage = messageList.get(position);
+        String chat = chatMessage.getMessage();
+        boolean isUserMessage = chatMessage.isUserMessage();
 
-        if (position % 2 == 0) { // user chat
+        if (isUserMessage) {
             holder.leftChatView.setVisibility(View.GONE);
             holder.rightChatView.setVisibility(View.VISIBLE);
             holder.rightChatText.setText(chat);
-
-        } else { // chatbot response
+        } else {
             holder.rightChatView.setVisibility(View.GONE);
             holder.leftChatView.setVisibility(View.VISIBLE);
             holder.leftChatText.setText(chat);
@@ -45,13 +46,12 @@ public class AdapterGreenbot extends RecyclerView.Adapter<AdapterGreenbot.MyView
         return messageList.size();
     }
 
-    public void addChatToList(String chat) {
-        messageList.add(chat);
-        notifyItemInserted(messageList.size()-1);
+    public void addChatToList(ChatMessage chatMessage) {
+        messageList.add(chatMessage);
+        notifyItemInserted(messageList.size() - 1);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
         private LinearLayout leftChatView;
         private LinearLayout rightChatView;
         private TextView leftChatText;
@@ -66,3 +66,4 @@ public class AdapterGreenbot extends RecyclerView.Adapter<AdapterGreenbot.MyView
         }
     }
 }
+

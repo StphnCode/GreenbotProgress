@@ -107,7 +107,7 @@ public class ForGuidanceConsultation extends AppCompatActivity {
         btnSet.setOnClickListener((v) -> setSched());
     }
     private void selectDate(){
-        DatePickerDialog dialog = new DatePickerDialog(this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
@@ -135,8 +135,8 @@ public class ForGuidanceConsultation extends AppCompatActivity {
         }, currentYear, currentMonth, currentDay);
 
         dialog.show();
-        dialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
-        dialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+        dialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.WHITE);
+        dialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE);
     }
 
     private void selectTime(){

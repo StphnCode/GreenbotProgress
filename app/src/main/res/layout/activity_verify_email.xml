@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".VerifyEmail">
 
     <TextView
@@ -29,6 +30,7 @@
         android:layout_marginStart="27dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="28dp"
+        android:textColor="#000000"
         android:text="You will need to verify your email to complete registration."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +43,7 @@
         android:layout_marginStart="77dp"
         android:layout_marginTop="23dp"
         android:layout_marginEnd="78dp"
+        android:textColor="#000000"
         android:text="Please click on the link in the email we sent you. If you have not received the email after a few minutes, please check your spam folder"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +77,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="51dp"
         android:layout_marginBottom="118dp"
+        android:textColor="#000000"
         android:text="Login with your account after verifying your email."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

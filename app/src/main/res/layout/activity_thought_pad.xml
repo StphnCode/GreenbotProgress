@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".ThoughtPad">
 
     <LinearLayout
@@ -68,6 +69,7 @@
                 android:fontFamily="@font/poppins"
                 android:hint="Write down your thoughts"
                 android:padding="12dp"
+                android:textColor="@color/black"
                 android:textSize="18dp"
                 android:minLines="15"
                 android:gravity="top"

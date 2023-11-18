@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".SelfCare">
 
     <View
@@ -71,6 +72,7 @@
         android:layout_marginTop="11dp"
         android:fontFamily="@font/poppins"
         android:paddingLeft="15dp"
+        android:textColor="#9a8c98"
         android:text="Therapeutic Exercises"
         android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,17 +99,19 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins"
         android:text="Breathing Exercise"
+        android:textColor="#9a8c98"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/BreathingExercise"
         app:layout_constraintTop_toTopOf="@+id/BreathingExercise" />
 
     <TextView
-        android:layout_width="50dp"
-        android:layout_height="15dp"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/poppins_light"
         android:text="3 min"
         android:textAlignment="textStart"
+        android:textColor="#9a8c98"
         app:layout_constraintStart_toStartOf="@+id/BreathingExercise"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -139,6 +143,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/poppins"
+        android:textColor="#9a8c98"
         android:text="Thought Pad"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/ThoughtPad"
@@ -150,6 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins"
+        android:textColor="#9a8c98"
         android:paddingLeft="15dp"
         android:text="On a scale of 1-5, how are you feeling today?"
         app:layout_constraintTop_toBottomOf="@+id/currentDate"
@@ -217,6 +223,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/poppins_bold"
+        android:textColor="#444444"
         android:text="1"
         android:textSize="30dp"
         app:layout_constraintEnd_toStartOf="@+id/slider"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FCFCFC"
     tools:context=".Registration">
 
     <ImageView
@@ -47,6 +48,7 @@
         android:background="@drawable/name_bg"
         android:drawableLeft="@drawable/email_icon"
         android:drawablePadding="16.02dp"
+        android:textColor="#000000"
         android:ellipsize="end"
         android:ems="10"
         android:fontFamily="@font/poppins"
@@ -74,6 +76,7 @@
         android:background="@drawable/name_bg"
         android:drawableLeft="@drawable/account_icon"
         android:drawablePadding="16.02dp"
+        android:textColor="#000000"
         android:ellipsize="end"
         android:ems="10"
         android:fontFamily="@font/poppins"
@@ -100,6 +103,7 @@
         android:drawableLeft="@drawable/key_icon"
         android:drawablePadding="16.02dp"
         android:ellipsize="end"
+        android:textColor="#000000"
         android:ems="10"
         android:fontFamily="@font/poppins"
         android:hint="Enter your password"
@@ -123,6 +127,7 @@
         android:drawableLeft="@drawable/lock_icon"
         android:drawablePadding="16.02dp"
         android:ellipsize="end"
+        android:textColor="#000000"
         android:ems="10"
         android:fontFamily="@font/poppins"
         android:hint="Confirm your password"
@@ -148,6 +153,7 @@
         android:paddingTop="14.89dp"
         android:paddingEnd="34.33dp"
         android:paddingBottom="9.57dp"
+        android:gravity="center"
         android:text="Register"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
@@ -181,7 +187,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

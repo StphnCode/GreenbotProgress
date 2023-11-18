@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".MenuPrivacyPolicy">
 
 
@@ -73,7 +74,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
 
 

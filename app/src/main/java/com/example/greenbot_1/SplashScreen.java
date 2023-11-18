@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,20 +21,21 @@ public class SplashScreen extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_splash_screen);
 
-        Thread thread = new Thread(){
-            @Override
-            public void run() {
-                try {
-                    sleep(3000);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }finally {
+        // Check for internet connection
+        if (NetworkUtil.isNetworkAvailable(this)) {
+            // There is an internet connection
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
                     startActivity(new Intent(SplashScreen.this, GetStarted.class));
                 }
-            }
-        };
-        thread.start();
-
+            }, 3000);
+        } else {
+            // No internet connection
+            // Display a message to the user (you can use a dialog, toast, or a custom view)
+            // Here's a simple example using a toast message:
+            Toast.makeText(this, "No internet connection. Please connect to the internet and try again.", Toast.LENGTH_LONG).show();
+        }
     }
-
 }

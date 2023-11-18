@@ -8,7 +8,7 @@ import retrofit2.http.POST;
 public interface GreenbotAPI {
     @FormUrlEncoded
     @POST("chat")
-    Call<ChatResponse> chatWithTheBit(@Field("chatInput") String message);
+    Call<ChatResponse> getChatbotResponse(@Field("chatInput") String userMessage);
 }
 
 class ChatResponse {
