@@ -1,11 +1,19 @@
 package com.example.greenbot_1;
 
-import java.sql.Timestamp;
+import com.google.firebase.Timestamp;
 
 public class Journal {
     String date;
     String content;
+    Timestamp timestamp;
 
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public Journal() {
     }

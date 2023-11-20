@@ -15,9 +15,10 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 
-import java.sql.Timestamp;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.util.Calendar;
 
@@ -68,6 +69,7 @@ public class ThoughtPad extends AppCompatActivity {
         Journal journal = new Journal();
         journal.setDate(date);
         journal.setContent(content);
+        journal.setTimestamp(Timestamp.now());
 
         saveJournalToFirebase(journal);
     }

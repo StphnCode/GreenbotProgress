@@ -44,7 +44,7 @@ public class ThoughtPadList extends AppCompatActivity {
 
     void setUpRecyclerView(){
 
-        Query query = Utility.getCollectionReferenceForJournal().orderBy("date", Query.Direction.DESCENDING);
+        Query query = Utility.getCollectionReferenceForJournal().orderBy("timestamp", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Journal> options = new FirestoreRecyclerOptions.Builder<Journal>()
                 .setQuery(query, Journal.class).build();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

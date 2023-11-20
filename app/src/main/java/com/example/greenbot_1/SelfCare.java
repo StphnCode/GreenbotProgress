@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.slider.Slider;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -110,6 +111,7 @@ public class SelfCare extends AppCompatActivity {
         MoodTracker moodTracker = new MoodTracker();
         moodTracker.setDate(date);
         moodTracker.setMoodRate(moodRate);
+        moodTracker.setTimestamp(Timestamp.now());
 
         saveMoodToFirebase(moodTracker);
     }

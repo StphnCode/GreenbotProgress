@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="ic_launcher_background">#3F51B5</color>
+    <color name="weary_background">#E41717</color>
+    <color name="worried_background">#4D9EFE</color>
+    <color name="neutral_background">#ABDE86</color>
+    <color name="slightSmile_background">#FE8E28</color>
+    <color name="grin_background">#FECF37</color>
+
 </resources>
