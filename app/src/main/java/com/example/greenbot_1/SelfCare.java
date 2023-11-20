@@ -2,6 +2,7 @@ package com.example.greenbot_1;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class SelfCare extends AppCompatActivity {
 
     Slider slider;
     ImageButton btnCheckMood;
+    AppCompatButton btnDailyMood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class SelfCare extends AppCompatActivity {
         txtRate = findViewById(R.id.txtRate);
         slider = findViewById(R.id.slider);
         btnCheckMood = findViewById(R.id.btnCheckMood);
+        btnDailyMood = findViewById(R.id.btnDailyMood);
 
 
         btnLeftArrow.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +61,8 @@ public class SelfCare extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnDailyMood.setOnClickListener((v)->startActivity(new Intent(SelfCare.this, DailyMood2.class)));
         btnBreathingExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +122,7 @@ public class SelfCare extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Utility.showToast(SelfCare.this, "Saved");
-                    finish();
+
                 }else{
                     Utility.showToast(SelfCare.this, "Failed to save");
                 }

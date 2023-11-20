@@ -1,8 +1,21 @@
 package com.example.greenbot_1;
 
+import com.google.firebase.Timestamp;
+
 public class MoodTracker {
-    String date;
-    int moodRate;
+    private String date;
+    private Timestamp timestamp;
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    private int moodRate;
+
 
     public MoodTracker() {
     }
